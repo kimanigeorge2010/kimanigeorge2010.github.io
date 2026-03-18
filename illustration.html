@@ -1,0 +1,875 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Illustration & Caricature — Kimani George</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Bebas+Neue&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Design tokens matching main site aesthetic ─── */
+    :root {
+      --black:   #0a0a0a;
+      --white:   #f5f4f0;
+      --accent:  #c8a96e;        /* warm gold — echoes the site's editorial warmth */
+      --muted:   #888880;
+      --card-bg: #111110;
+      --border:  rgba(200,169,110,0.18);
+      --ff-display: 'Cormorant Garamond', Georgia, serif;
+      --ff-body:    'DM Sans', sans-serif;
+      --ff-label:   'Bebas Neue', sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--ff-body);
+      font-weight: 300;
+      font-size: 16px;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.4rem 3rem;
+      background: rgba(10,10,10,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: var(--ff-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--ff-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--white); }
+
+    .nav-cta {
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--accent);
+      padding: 0.55rem 1.3rem;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 55vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 4rem;
+      padding-top: 8rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 80% 50%, rgba(200,169,110,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 80% at 10% 80%, rgba(200,169,110,0.04) 0%, transparent 60%);
+    }
+
+    .hero-label {
+      font-family: var(--ff-label);
+      font-size: 0.82rem;
+      letter-spacing: 0.22em;
+      color: var(--accent);
+      margin-bottom: 1.2rem;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .hero-label::before {
+      content: '';
+      display: inline-block;
+      width: 2rem;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    .hero h1 {
+      font-family: var(--ff-display);
+      font-size: clamp(2.8rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      position: relative;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      margin-top: 1.5rem;
+      font-size: 0.95rem;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+      position: relative;
+    }
+
+    .hero-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin-top: 3.5rem;
+      position: relative;
+    }
+
+    /* ─── SECTION WRAPPER ─── */
+    .section {
+      padding: 5rem 3rem;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .section-num {
+      font-family: var(--ff-label);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      opacity: 0.7;
+    }
+
+    .section-title {
+      font-family: var(--ff-display);
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 300;
+      letter-spacing: -0.01em;
+    }
+
+    .section-title em { font-style: italic; color: var(--accent); }
+
+    .section-desc {
+      max-width: 560px;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.75;
+      margin-bottom: 3rem;
+      padding-left: calc(0.75rem + 1.5rem + 1.5rem); /* align with title */
+    }
+
+    /* ─── CARICATURE GRID ─── */
+    .caricature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .caricature-card {
+      position: relative;
+      background: var(--card-bg);
+      overflow: hidden;
+      cursor: pointer;
+      border: 1px solid var(--border);
+    }
+
+    .caricature-card:hover .card-overlay { opacity: 1; }
+    .caricature-card:hover .card-img { transform: scale(1.04); }
+
+    .card-img-wrap {
+      aspect-ratio: 3/4;
+      overflow: hidden;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top center;
+      display: block;
+      transition: transform 0.5s ease;
+      filter: saturate(0.92);
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(10,10,10,0.92) 0%, rgba(10,10,10,0.2) 60%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.5rem;
+    }
+
+    .card-overlay-label {
+      font-family: var(--ff-label);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .card-overlay-title {
+      font-family: var(--ff-display);
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--white);
+    }
+
+    .card-footer {
+      padding: 0.9rem 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .card-footer-label {
+      font-family: var(--ff-label);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      color: var(--muted);
+    }
+
+    .card-footer-name {
+      font-family: var(--ff-display);
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--white);
+      margin-top: 0.1rem;
+    }
+
+    /* ─── DIVIDER ─── */
+    .section-divider {
+      width: calc(100% - 6rem);
+      margin: 0 3rem;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* ─── ABSOLUT CAMPAIGN ─── */
+    .campaign-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: end;
+      margin-bottom: 2.5rem;
+    }
+
+    .campaign-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: var(--ff-label);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--black);
+      background: var(--accent);
+      padding: 0.3rem 0.7rem;
+      margin-bottom: 1rem;
+    }
+
+    .campaign-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+    }
+
+    .campaign-frame {
+      background: var(--card-bg);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .campaign-frame:hover .campaign-img { transform: scale(1.03); }
+
+    .campaign-img {
+      width: 100%;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s ease;
+      filter: saturate(0.95);
+    }
+
+    .campaign-caption {
+      padding: 0.8rem 1rem;
+    }
+
+    .campaign-caption-sub {
+      font-family: var(--ff-label);
+      font-size: 0.62rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+    }
+
+    .campaign-caption-title {
+      font-family: var(--ff-display);
+      font-size: 0.95rem;
+      color: var(--white);
+      margin-top: 0.15rem;
+    }
+
+    /* ─── OUTCOME COMIC ─── */
+    .comic-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .comic-card {
+      position: relative;
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .comic-card:hover .comic-img { transform: scale(1.02); }
+
+    .comic-img {
+      width: 100%;
+      display: block;
+      transition: transform 0.5s ease;
+    }
+
+    .comic-meta {
+      padding: 1.2rem 1.4rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .comic-meta-left {}
+
+    .comic-meta-tag {
+      font-family: var(--ff-label);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      color: var(--accent);
+    }
+
+    .comic-meta-title {
+      font-family: var(--ff-display);
+      font-size: 1.1rem;
+      font-weight: 400;
+      margin-top: 0.2rem;
+    }
+
+    .comic-meta-ep {
+      font-family: var(--ff-label);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+    }
+
+    /* ─── COMMISSION CTA ─── */
+    .cta-section {
+      padding: 6rem 3rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(200,169,110,0.06) 0%, transparent 70%);
+    }
+
+    .cta-eyebrow {
+      font-family: var(--ff-label);
+      font-size: 0.78rem;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+      display: block;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .cta-heading {
+      font-family: var(--ff-display);
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .cta-heading em { font-style: italic; color: var(--accent); }
+
+    .cta-body {
+      font-size: 0.9rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.75;
+      position: relative;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .btn-primary {
+      font-family: var(--ff-body);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--accent);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: opacity 0.2s;
+    }
+
+    .btn-primary:hover { opacity: 0.85; }
+
+    .btn-secondary {
+      font-family: var(--ff-body);
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      border: 1px solid var(--border);
+      padding: 0.85rem 2rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    footer a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--accent); }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: rgba(5,5,5,0.96);
+      backdrop-filter: blur(10px);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .lightbox.open { display: flex; }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 880px;
+      max-height: 90vh;
+      width: 100%;
+    }
+
+    .lightbox-img {
+      width: 100%;
+      max-height: 85vh;
+      object-fit: contain;
+      display: block;
+    }
+
+    .lightbox-close {
+      position: fixed;
+      top: 1.5rem;
+      right: 2rem;
+      font-family: var(--ff-body);
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+
+    .lightbox-close:hover { color: var(--white); }
+
+    /* ─── TICKER (scroll marquee matching main site) ─── */
+    .ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 0.7rem 0;
+      background: var(--card-bg);
+    }
+
+    .ticker-inner {
+      display: flex;
+      gap: 3rem;
+      animation: ticker 24s linear infinite;
+      white-space: nowrap;
+    }
+
+    .ticker-item {
+      font-family: var(--ff-label);
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .ticker-item span { color: var(--accent); }
+
+    @keyframes ticker {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero, .section, .cta-section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .section-divider { width: calc(100% - 3rem); margin: 0 1.5rem; }
+      .caricature-grid { grid-template-columns: 1fr 1fr; }
+      .campaign-intro { grid-template-columns: 1fr; }
+      .campaign-grid { grid-template-columns: 1fr; }
+      .comic-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; padding: 1.5rem; }
+    }
+
+    @media (max-width: 540px) {
+      .caricature-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── FADE IN ON LOAD ─── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Kimani George</a>
+    <ul class="nav-links">
+      <li><a href="index.html#expertise">Expertise</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="illustration.html" class="active">Illustration</a></li>
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+    </ul>
+    <a href="mailto:kimanigeorge2010@gmail.com" class="nav-cta">Commission a Piece</a>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-label">Illustration & Caricature</div>
+    <h1>Where personality<br>meets <em>sharp craft.</em></h1>
+    <p class="hero-sub">Bespoke caricature, editorial illustration, and comic art — drawn from over 30 years of creative practice. Available for individual commissions, editorial publications, and branded content.</p>
+    <div class="hero-divider"></div>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-inner">
+      <div class="ticker-item">Editorial Caricature <span>✦</span></div>
+      <div class="ticker-item">Political Illustration <span>✦</span></div>
+      <div class="ticker-item">Character Design <span>✦</span></div>
+      <div class="ticker-item">Sequential Art <span>✦</span></div>
+      <div class="ticker-item">Commercial Illustration <span>✦</span></div>
+      <div class="ticker-item">30+ Years of Craft <span>✦</span></div>
+      <div class="ticker-item">Editorial Caricature <span>✦</span></div>
+      <div class="ticker-item">Political Illustration <span>✦</span></div>
+      <div class="ticker-item">Character Design <span>✦</span></div>
+      <div class="ticker-item">Sequential Art <span>✦</span></div>
+      <div class="ticker-item">Commercial Illustration <span>✦</span></div>
+      <div class="ticker-item">30+ Years of Craft <span>✦</span></div>
+    </div>
+  </div>
+
+  <!-- SECTION 01: EDITORIAL & POLITICAL CARICATURES -->
+  <section class="section fade-up" id="caricature">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Editorial & Political <em>Caricature</em></h2>
+    </div>
+    <p class="section-desc">Sharp character studies of public figures — each one crafted to reveal personality, provoke thought, and land a point. Available for editorial commissions, publications, and events.</p>
+
+    <div class="caricature-grid">
+
+      <!-- Karen Nymau -->
+      <div class="caricature-card" onclick="openLightbox('Political_editorial_karen_nymau_FA.jpg')">
+        <div class="card-img-wrap">
+          <img class="card-img" src="Political_editorial_karen_nymau_FA.jpg" alt="Karen Nymau — Editorial Caricature" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-label">Editorial</div>
+          <div class="card-overlay-title">Karen Nymau</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer-label">Political · Editorial</div>
+          <div class="card-footer-name">Karen Nymau</div>
+        </div>
+      </div>
+
+      <!-- Larry Mwaado -->
+      <div class="caricature-card" onclick="openLightbox('Political_editorial_larry_mwaado_FA.jpg')">
+        <div class="card-img-wrap">
+          <img class="card-img" src="Political_editorial_larry_mwaado_FA.jpg" alt="Larry Mwaado — Editorial Caricature" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-label">Editorial</div>
+          <div class="card-overlay-title">Larry Mwaado</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer-label">Political · Editorial</div>
+          <div class="card-footer-name">Larry Mwaado</div>
+        </div>
+      </div>
+
+      <!-- Obat -->
+      <div class="caricature-card" onclick="openLightbox('Political_editorial_obat_FAi.jpg')">
+        <div class="card-img-wrap">
+          <img class="card-img" src="Political_editorial_obat_FAi.jpg" alt="Obat — Editorial Caricature" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-label">Editorial</div>
+          <div class="card-overlay-title">Obat</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer-label">Political · Editorial</div>
+          <div class="card-footer-name">Obat</div>
+        </div>
+      </div>
+
+      <!-- Pastor Nganga -->
+      <div class="caricature-card" onclick="openLightbox('Political_editorial_pastor_nganga_FA.jpg')">
+        <div class="card-img-wrap">
+          <img class="card-img" src="Political_editorial_pastor_nganga_FA.jpg" alt="Pastor Nganga — Editorial Caricature" loading="lazy" />
+        </div>
+        <div class="card-overlay">
+          <div class="card-overlay-label">Editorial</div>
+          <div class="card-overlay-title">Pastor Nganga</div>
+        </div>
+        <div class="card-footer">
+          <div class="card-footer-label">Religious · Political</div>
+          <div class="card-footer-name">Pastor Nganga</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SECTION 02: ABSOLUT ASIA CAMPAIGN -->
+  <section class="section fade-up" id="commercial">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Commercial <em>Illustration</em></h2>
+    </div>
+    <p class="section-desc">Illustration commissioned at global campaign level — integrating character art, brand identity, and cultural storytelling into a cohesive visual language.</p>
+
+    <div class="campaign-intro">
+      <div>
+        <div class="campaign-tag">Campaign · Commercial Illustration</div>
+        <h3 style="font-family:var(--ff-display);font-size:1.9rem;font-weight:300;line-height:1.15;">Absolut Asia<br><em style="color:var(--accent);font-style:italic;">Flavors Campaign</em></h3>
+      </div>
+      <div>
+        <p style="font-size:0.85rem;color:var(--muted);line-height:1.8;">Three-execution illustration campaign for Absolut Vodka's Asia range — each piece building a distinct party world around the product. Character-led storytelling that balances cultural nuance with global brand confidence.</p>
+        <p style="font-size:0.78rem;color:var(--accent);margin-top:0.8rem;font-family:var(--ff-label);letter-spacing:0.12em;">ABSOLUT VODKA · ASIA SERIES · 3 EXECUTIONS</p>
+      </div>
+    </div>
+
+    <div class="campaign-grid">
+      <div class="campaign-frame" onclick="openLightbox('absolute_vodka_Asia_1.jpg')">
+        <img class="campaign-img" src="absolute_vodka_Asia_1.jpg" alt="Absolut Flavors" loading="lazy" />
+        <div class="campaign-caption">
+          <div class="campaign-caption-sub">Execution 01</div>
+          <div class="campaign-caption-title">Absolut Flavors</div>
+        </div>
+      </div>
+      <div class="campaign-frame" onclick="openLightbox('absolute_vodka__Asia_2.jpg')">
+        <img class="campaign-img" src="absolute_vodka__Asia_2.jpg" alt="Absolut Rave" loading="lazy" />
+        <div class="campaign-caption">
+          <div class="campaign-caption-sub">Execution 02</div>
+          <div class="campaign-caption-title">Absolut Rave</div>
+        </div>
+      </div>
+      <div class="campaign-frame" onclick="openLightbox('absolute_vodka_Asia__3.jpg')">
+        <img class="campaign-img" src="absolute_vodka_Asia__3.jpg" alt="Absolut Party" loading="lazy" />
+        <div class="campaign-caption">
+          <div class="campaign-caption-sub">Execution 03</div>
+          <div class="campaign-caption-title">Absolut Party</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- SECTION 03: OUTCOME COMIC -->
+  <section class="section fade-up" id="comic">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">Sequential Art — <em>OUTCOME</em></h2>
+    </div>
+    <p class="section-desc">An original comic series set in a near-future East Africa — tracing the consequences of a mysterious urban phenomenon. Bold panel composition, cinematic pacing, and locally grounded storytelling.</p>
+
+    <div class="comic-grid">
+      <div class="comic-card" onclick="openLightbox('Outcome_1.jpg')">
+        <img class="comic-img" src="Outcome_1.jpg" alt="OUTCOME — The New Millennium Plague, Episode 008" loading="lazy" />
+        <div class="comic-meta">
+          <div class="comic-meta-left">
+            <div class="comic-meta-tag">Sequential Art · Original Series</div>
+            <div class="comic-meta-title">OUTCOME — The New Millennium Plague</div>
+          </div>
+          <div class="comic-meta-ep">008 April</div>
+        </div>
+      </div>
+      <div class="comic-card" onclick="openLightbox('Outcome_4.jpg')">
+        <img class="comic-img" src="Outcome_4.jpg" alt="OUTCOME — The New Millennium Plague, Episode 005 May" loading="lazy" />
+        <div class="comic-meta">
+          <div class="comic-meta-left">
+            <div class="comic-meta-tag">Sequential Art · Original Series</div>
+            <div class="comic-meta-title">OUTCOME — The New Millennium Plague</div>
+          </div>
+          <div class="comic-meta-ep">005 May</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-section fade-up">
+    <span class="cta-eyebrow">Commission a Piece</span>
+    <h2 class="cta-heading">Let's make something<br><em>worth talking about.</em></h2>
+    <p class="cta-body">Whether it's a caricature of a colleague, an editorial illustration for your publication, or a comic series for your brand — commissions are open. Starting rates on request.</p>
+    <div class="cta-actions">
+      <a href="mailto:kimanigeorge2010@gmail.com?subject=Illustration Commission Enquiry" class="btn-primary">Send a Brief</a>
+      <a href="index.html" class="btn-secondary">← Main Portfolio</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 · Kimani George · Nairobi</span>
+    <span>
+      <a href="https://www.linkedin.com/in/george-kimani-illustrator/" target="_blank">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="https://behance.net/kimanigeorge" target="_blank">Behance</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:kimanigeorge2010@gmail.com">kimanigeorge2010@gmail.com</a>
+    </span>
+  </footer>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">✕ Close</button>
+    <div class="lightbox-inner" onclick="event.stopPropagation()">
+      <img class="lightbox-img" id="lightbox-img" src="" alt="" />
+    </div>
+  </div>
+
+  <script>
+    // Lightbox
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // Fade-up on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
